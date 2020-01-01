@@ -32,11 +32,27 @@ public class BaiTapMang {
 
 	static void demVaXuatPhanTuMang(int []M)
 	{
-		for (int i = 0; i < M.length; i++)
+		int []SauLoc=locSoTrungNhau(M);
+		if(M==null)
+			System.out.println("Không có");
+		else {
+		for (int i = 0; i < SauLoc.length; i++)
 		{
-			System.out.print(M[i]+" ");
+			int dem=0;
+			for (int j = 0; j < M.length; j++) 
+			{
+				if(SauLoc[i]==M[j])
+				{
+					dem++;
+				}				
+			}
+			if(dem==1)
+				System.out.print(SauLoc[i]+" ");
+			else
+				System.out.print(SauLoc[i]+"["+dem+"]"+" ");
 		}
 		System.out.println(" ==> tổng số: "+M.length);
+		}
 	}
 	static int[] timSoChan(int []M)
 	{
@@ -100,7 +116,7 @@ public class BaiTapMang {
 				a++;				 
 		}
 		if(a==0)
-			System.out.println("Không có số chẵn.");		   
+			soNT=null;		   
 		else
 		{
 		soNT= new int[a];
@@ -154,5 +170,33 @@ public class BaiTapMang {
 		if(dem==2)
 			kt=true;
 		return kt;
+	}
+	static int[] locSoTrungNhau(int []M)
+	{
+		if(M==null)
+			return null;
+		else
+		{
+		Arrays.sort(M);		
+		int []SauLoc;
+		int count=1;
+		for (int i = 0; i < M.length-1; i++) 
+		{
+			if(M[i]!=M[i+1])
+				count++;
+		}
+		SauLoc=new int[count];
+		int a=0;
+		for (int i = 0; i < M.length-1; i++) 
+		{
+			if(M[i]!=M[i+1])
+			{
+				SauLoc[a]=M[i];
+				a++;
+			}
+		}
+		SauLoc[count-1]=M[M.length-1];
+		return SauLoc;
+		}
 	}
 }
